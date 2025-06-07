@@ -7,3 +7,8 @@ Data anonymization is the process of transforming personal or sensitive data in 
 
 This repo explores how to build scalable, secure, and compliant data workflows using PySpark, Microsoft Presidio, and Faker—covering hands-on examples of detection, masking, hashing, and synthetic data generation that apply equally to data engineering and AI use cases.
 
+
+🧠 Use Cases
+Data Engineering Pipelines
+AI/LLM Prompt Scrubbing
+Privacy Compliance (GDPR, PDPA)
