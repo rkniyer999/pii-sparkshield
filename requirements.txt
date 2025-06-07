@@ -1,0 +1,4 @@
+presidio-analyzer
+presidio-anonymizer
+Faker
+numpy<2
