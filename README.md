@@ -25,5 +25,6 @@ pip install -r requirements.txt
 
 📓 Notebooks
 01_pii_detection_presidio.ipynb: Detect PII using Presidio
-02_anonymization_masking_hashing.ipynb: Apply masking and hashing
-03_synthetic_data_faker.ipynb: Generate synthetic data
+02_synthetic_data_faker.ipynb: Generate synthetic data
+03_anonymization_masking_hashing.ipynb: Apply masking and hashing
+
