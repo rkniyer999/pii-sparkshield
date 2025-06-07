@@ -4,7 +4,7 @@ A PySpark-based framework for detecting and anonymizing Personally Identifiable 
 
 ## 🚀 Features
 
-- 🔍 PII Detection with Microsoft Presidio
+- 🔍 PII Detection & redaction with Microsoft Presidio
 - 🛡️ Anonymization via Masking, Hashing, and Encryption
 - 🧪 Synthetic Data Generation using Faker
 - ⚙️ Scalable on Microsoft Fabric (Lakehouse + Data Factory)
