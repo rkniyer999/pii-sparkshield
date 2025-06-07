@@ -1,14 +1,29 @@
-# spark-anonymizer-kit
-PII Detection and Anonymization with PySpark
-In the era of data democratization and AI-driven insights, protecting personally identifiable information (PII) is no longer just a regulatory checkbox——it’s a foundational pillar of responsible data engineering and AI development.
+# 🔐 PII SparkShield
 
-# Data Anonymization
-Data anonymization is the process of transforming personal or sensitive data in such a way that the individuals to whom the data pertains can no longer be identified—either directly or indirectly. This is a critical step in ensuring compliance with privacy regulations like GDPR, PDPA, and HIPAA, and in enabling safe data sharing for analytics and AI model training.
+A PySpark-based framework for detecting and anonymizing Personally Identifiable Information (PII) using Microsoft Presidio, Faker, and Microsoft Fabric.
 
-This repo explores how to build scalable, secure, and compliant data workflows using PySpark, Microsoft Presidio, and Faker—covering hands-on examples of detection, masking, hashing, and synthetic data generation that apply equally to data engineering and AI use cases.
+## 🚀 Features
 
+- 🔍 PII Detection with Microsoft Presidio
+- 🛡️ Anonymization via Masking, Hashing, and Encryption
+- 🧪 Synthetic Data Generation using Faker
+- ⚙️ Scalable on Microsoft Fabric (Lakehouse + Data Factory)
 
-🧠 Use Cases
-Data Engineering Pipelines
-AI/LLM Prompt Scrubbing
-Privacy Compliance (GDPR, PDPA)
+## 📁 Project Structure
+
+- `notebooks/`: Jupyter notebooks with step-by-step examples
+- `src/`: Core PySpark pipeline and utility functions
+- `data/`: Sample input data
+- `requirements.txt`: Python dependencies
+
+## 🧰 Setup
+
+```bash
+git clone https://github.com/your-username/pii-sparkshield.git
+cd pii-sparkshield
+pip install -r requirements.txt
+
+📓 Notebooks
+01_pii_detection_presidio.ipynb: Detect PII using Presidio
+02_anonymization_masking_hashing.ipynb: Apply masking and hashing
+03_synthetic_data_faker.ipynb: Generate synthetic data
