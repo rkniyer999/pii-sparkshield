@@ -18,21 +18,24 @@ A PySpark-based framework for detecting and anonymizing Personally Identifiable 
 - `data/`: Sample input data
 - `requirements.txt`: Python dependencies
 
-## 📓 Notebooks
-01_pii_detection_presidio.ipynb: Detect PII using Presidio
-02_synthetic_data_faker.ipynb: Generate synthetic data
-03_anonymization_masking_hashing.ipynb: Apply masking and hashing
 
-
-
-01_pii_detection_presidio.ipynb: Detect PII using Presidio
-
-
-# Redact PII Data for a Column in DataFrames
-
+## Redact PII Data for a Column in DataFrames
 This method is designed to process DataFrames containing columns with potentially sensitive personally identifiable information (PII). It identifies and redacts PII by replacing detected entities with a placeholder text.
 
+## Typical Use Cases
+
+### Unstructured Data
+Useful for processing columns extracted from unstructured sources such as `.txt` or `.pdf` files, where free-form text may contain PII.
+
+### Structured Data
+Can be applied to columns like comments, feedback, or notes in structured tables, where text fields may also include PII.
+
+## 📓 Notebooks
+01_pii_detection_presidio.ipynb: Detect, Redact PII using Presidio
+
 ---
+## Method
+def identify_and_redact_pii_column(df, column_name, replacement_txt, output_column_name)
 
 ## Args
 
@@ -47,15 +50,24 @@ This method is designed to process DataFrames containing columns with potentiall
 
 - `anonymizedDataframe` – DataFrame with a new redacted column
 
+## Usage
+```
+df = identify_and_redact_pii_column(df, "EmailAddress", replacement_txt="MASKED")
+```
+Since the replacement_text is passed as "MASKED" all identified PII entities will be replaced with "MASKED". 
+A Dataframe will be returned with redacted column with column name {EmailAddress__redacted} is returned.
+
+```
+df = identify_and_redact_pii_column(df, "EmailAddress")
+
+```
+Since the replacement_text is not passed all identified PII entities will be replaced with "{EMAIL_ADDRESS}.e.g.  
+A Dataframe with redacted column with column name {EmailAddress__redacted} is returned.
+
+
 ---
 
-## Typical Use Cases
 
-### Unstructured Data
-Useful for processing columns extracted from unstructured sources such as `.txt` or `.pdf` files, where free-form text may contain PII.
-
-### Structured Data
-Can be applied to columns like comments, feedback, or notes in structured tables, where text fields may also include PII.
 
 ---
 
