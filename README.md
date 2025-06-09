@@ -18,6 +18,7 @@ A PySpark-based framework for detecting and anonymizing Personally Identifiable 
 - `data/`: Sample input data
 - `requirements.txt`: Python dependencies
 
+---
 
 ## Redact PII Data for a Column in DataFrames
 This method is designed to process DataFrames containing columns with potentially sensitive personally identifiable information (PII). It identifies and redacts PII by replacing detected entities with a placeholder text.
