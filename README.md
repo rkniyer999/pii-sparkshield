@@ -13,16 +13,15 @@ A PySpark-based repository for detecting and anonymizing Personally Identifiable
 
 # 📁 Project Structure
 
-- `notebooks/`: Jupyter notebooks with step-by-step examples
-- `src/`: Core PySpark pipeline and utility functions
-- `data/`: Sample input data
-- `requirements.txt`: Python dependencies
+- `notebooks/`: PySpark notebooks with step-by-step examples
+- `data/`: Sample data
+- `images`: Images used
 
 ---
 There are multiple approaches to implementing data privacy at scale using  PySpark. This repository focuses specifically on the following three approaches using PySpark as processing engine.
 1. [Identify and anonymizing PII in Structured and Unstructured Data Using Presidio](#identify-and-anonymizing-pii-in-structured-and-unstructured-data-using-presidio)
-2. Generate Synthetic Data Using Faker for Anonymization
-3. Use Built-in PySpark Functions for Hashing and Masking
+2. [Generate Synthetic Data Using Faker for Anonymization](#generate-synthetic-data-using-faker-for-anonymization)
+3. [Use Built-in PySpark Functions for Hashing and Masking](#use-built-in-pyspark-functions-for-hashing-and-masking)
 
 Each of these approaches are covered in detail in seperate folder
 
@@ -44,7 +43,7 @@ This notebook contains function designed to process DataFrames containing column
 ## 🧰 Environment Setup
 1. **Fabric workspace** with sufficient permissions to create and manage custom environments.
     1. Create a new Fabric lakehouse or use existing lakehouse within Fabric. Refer [this](https://learn.microsoft.com/en-us/fabric/data-engineering/tutorial-build-lakehouse#create-a-lakehouse) for more details.
-    1. Create a folder "data" and subfolder "customer-profile-sample-data" in lakehouse. Download all files from "customer-profile-sample-data" folder from [this](/data/customer-profile-sample-data/) location and upload in the Lakehouse subfolder.<br>
+    1. Create a folder "data" and subfolder "customer-profile-sample-data" in lakehouse. Download the sample data file from "customer-profile-sample-data" folder from [this](/data/customer-profile-sample-data/) location and upload in the Lakehouse subfolder.<br>
     ![Customer-profile-sample-data](/images/customer-profile-sample-data.png)
 1. **Configure Spark Pool** Make sure to create (or select) a valid Spark pool that you can attach to your Fabric environment.
 1. **Create a New Environment**
@@ -76,11 +75,52 @@ This notebook contains function designed to process DataFrames containing column
     Click "Publish" to publish changes to the environment. (This may take time)
 
 ### Run the Sample Notebook
-1. Open the presidio_and_spark.ipynb notebook
+1. Open the 01_pii_detection_redaction_presidio.ipynb notebook
 1. When opening your notebook, ensure you pick the custom environment you created.
 1. Confirm you have selected the valid Spark pool you configured earlier.
+1. Replace the location for "large model whl file" and "sample data file"
+1. Run all cells
 
-### Performance Optimization Techniques used in notebooks
+
+## Generate Synthetic Data Using Faker for Anonymization
+
+### 📓 Notebooks
+02_pii_detection_syntheticdatagen_presidio_faker.ipynb: Identify and replace PII data with synthetic data using Faker
+
+This notebook contains function to identify PII data in Structured and Unstructured data using Presidio and generate Synthetic Data Using Faker for Anonymization
+
+### Typical Use Cases
+- **Unstructured Data** - Useful for processing columns extracted from unstructured sources such as `.txt` or `.pdf` files, where free-form text may contain PII.
+- **Structured Data** - Can be applied to columns like comments, feedback, or notes in structured tables, where text fields may also include PII.
+
+### How It Works?
+- **Detection** - The method scans the specified column for PII entities using an NLP-based analyzer.
+- **Replacement with synthetic data** - Detected PII is replaced with a synthetic data ensuring sensitive information is not exposed.
+
+## 🧰 Environment Setup
+Refer [environment setup](#-environment-setup)
+
+### Run the Sample Notebook
+1. Open the 02_pii_detection_syntheticdatagen_presidio_faker.ipynb notebook
+1. When opening your notebook, ensure you pick the custom environment you created.
+1. Confirm you have selected the valid Spark pool you configured earlier.
+1. Replace the location for "large model whl file" and "sample data file"
+1. Run all cells
+
+## Use Built-in PySpark Functions for Hashing and Masking
+This notebook contains samples to use PySpark's built-in functions for data hashing and masking
+### Typical Use Cases
+- **Structured Data** - Can be applied to columns like customer id,credit card,Phone number in structured tables.
+### How It Works?
+- Masking: Use complete or partially hide/mask data (e.g., mask all but the last 4 digits of a phone number).
+- Hashing: Uses PySpark’s built-in sha2 function to compute the SHA-256 hash (hexadecimal string) for each value in the given column. (e.g. Customer ID is hashed).
+
+### Run the Sample Notebook
+1. Open the 03_PII_Hashing_Masking.ipynb notebook
+1. Replace the location for "sample data file"
+1. Run all cells
+
+## Performance Optimization Techniques used in notebooks
 1. Pandas UDFs (also known as vectorized UDFs) process data in batches using Pandas Series, which significantly reduces serialization overhead and leverages vectorized operations, making them much faster than standard Python UDFs—especially for large datasets
 2. Broadcasting tells Spark to serialize the object only once, send it to each worker node once, and reuse it for all tasks on that node.This is especially important for large, read-only objects like NLP models or engines.
 If you reference a Python object (like analyzer,anonymizer) directly inside a UDF, Spark will serialize and send a separate copy of that object to every worker and every task.
@@ -91,15 +131,5 @@ For heavy objects (like NLP models, which can be hundreds of MB), this is ineffi
 - Slow job startup
 
 ---
-## Generate Synthetic Data Using Faker for Anonymization
-
-
-
-
----
-
-
-
-
-Limitations
+## Limitations
 Currently only support english
