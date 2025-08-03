@@ -13,7 +13,7 @@ A PySpark-based repository for detecting and anonymizing Personally Identifiable
 
 # 📁 Project Structure
 
-- `notebooks/`: PySpark notebooks with step-by-step examples
+- `notebooks/`: PySpark notebooks with step-by-step examples.
 - `data/`: Sample data
 - `images`: Images used
 
